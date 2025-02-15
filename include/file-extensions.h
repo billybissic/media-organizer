@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-std::vector<std::string> audioFileExtensions;
-std::vector<std::string> imageFileExtensions;
+extern std::vector<std::string> audioFileExtensions;
+extern std::vector<std::string> imageFileExtensions;
 
 bool isAudioFileSupported(std::string extension);
 bool isImageFileSupported(std::string extension);

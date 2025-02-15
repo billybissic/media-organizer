@@ -1,5 +1,7 @@
+#include "file-extensions.h"
 #include <string>
 #include <vector>
+#include <iostream>
 
 std::vector<std::string> audioFileExtensions = { ".mp3", ".flac", ".wav", ".aac", ".m4a" };
 std::vector<std::string> imageFileExtensions = { ".jpg", ".jpeg", ".png", ".bmp", ".gif" };

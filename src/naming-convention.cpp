@@ -77,3 +77,20 @@ void nameDirectory() {
 		break;
 	}
 }
+
+std::string generateAlbumDirectoryName(std::string artist, std::string album, std::string year) {
+	std::string directoryName = "";
+	if (namingConvention == "ArtistAlbumYear") {
+		directoryName = "[" + artist + "]" + "-" + "[" + album + "]" + "-" + "[" + year + "]";
+	}
+	else if (namingConvention == "YearArtistAlbum") {
+		directoryName = "[" + year + "]-[" + artist + "]-[" + album + "]";
+	}
+	else if (namingConvention == "ArtistAlbum") {
+		directoryName = "[" + artist + "]-[" + album + "]";
+	}
+	else {
+		std::cout << "Invalid naming convention. " << std::endl;
+	}
+	return directoryName;
+}

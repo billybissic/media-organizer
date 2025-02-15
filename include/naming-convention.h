@@ -18,5 +18,6 @@ void setAlbumName(const std::string& name);
 void setNamingConvention();
 void listNamingConventions();
 void nameDirectory();
+std::string generateAlbumDirectoryName(const std::string artist, const std::string album, const std::string year);
 
 #endif

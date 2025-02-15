@@ -1,4 +1,5 @@
 #include "cli-interface.h"
+#include "execute-conditions.h"
 #include "music-sort.h"
 #include "directory.h"
 #include <iostream>
@@ -6,9 +7,6 @@
 #include <map>
 #include <vector>
 #include <sstream>
-
-bool isDryRun = false;
-bool isDaemonStarted = false;
 
 void printHelp() {
    std::cout << "Commands:\n";
@@ -75,19 +73,32 @@ void executeCommand(const std::string& command, const std::map<std::string, std:
     }
 
     if (command == "sort-albums" || command == "sort-tracks" || command == "sort-directory") {
-        std::cout << "Sorting from " << sortDirectory << " to " << destination << "\n";
+        std::cout << "Sorting" << std::endl << "From: " << sortDirectory << std::endl << "To: " << destination << std::endl;
         if (dryRun) {
+            setDryRun(true);
             std::cout << "[DRY RUN] No files will be moved.\n";
         }
         else {
-			std::cout << "Files will be moved.\n";
-            
+            std::cout << "Files will be moved.\n";
+        }
+
+        std::cout << "Would you like to continue? [y/n]: ";
+        std::string response;
+        std::cin >> response;
+        if (response != "y") {
+            std::cout << "Exiting...\n";
+            return;
+        }
+        else {
+			std::cout << "Continuing...\n";
+			clearScreen();
             sortDirectoryOfAlbums(sortDirectory, destination);
             //getFilesInDirectory(sortDirectory);
         }
-		
+		 
         
     } else if (command == "start-daemon") {
+		setDaemonStarted(true);
         std::cout << "Starting daemon for " << sortDirectory << " with destination " << destination << "\n";
     } else {
         std::cerr << "Error: Unknown command: " << command << "\n";

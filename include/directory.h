@@ -17,4 +17,6 @@ void getDirectoriesInDirectory();
 
 void analyzeFilesInDirectory();
 
+std::string appendToDirectory(const std::string& directory, const std::string& append);
+
 #endif // DIRECTORY_H

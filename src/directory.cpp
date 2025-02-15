@@ -40,3 +40,24 @@ void getDirectoriesInDirectory() {
        std::cerr << "Error: " << e.what() << std::endl;
     }
 }
+
+void createDirectory(const std::string& directory) {
+	try {
+		fs::create_directory(directory);
+		std::cout << "Directory created: " << directory << std::endl;
+	}
+	catch (const fs::filesystem_error& e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+}
+
+std::string appendToDirectory(const std::string& directory, const std::string& append) {
+    /* check if there is an ending slash */
+	if (directory.back() == '/') {
+		return directory + append;
+    }
+    else {
+        return directory + "/" + append;
+    }
+}
+

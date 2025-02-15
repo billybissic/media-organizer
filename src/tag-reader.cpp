@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
+#include <taglib/tpropertymap.h>
 #include <vector>
 
 namespace fs = std::filesystem;
@@ -46,6 +47,7 @@ void setReleaseYear(const std::string& albumYear) {
 
 bool checkUniformTags(const std::string& directoryPath) {
     std::string commonArtist, commonAlbum;
+    std::int16_t commonYear;
     bool firstFile = true;
 
     for (const auto& entry : fs::directory_iterator(directoryPath)) {
@@ -54,21 +56,41 @@ bool checkUniformTags(const std::string& directoryPath) {
 
             if (!file.isNull() && file.tag()) {
                 std::string artist = file.tag()->artist().to8Bit(true);
-                std::string album  = file.tag()->album().to8Bit(true);
+				std::string album = file.tag()->album().to8Bit(true);
+				std::int16_t year = file.tag()->year();
+
+                if (file.file()) {
+                    TagLib::PropertyMap properties = file.file()->properties();
+                    if (properties.contains("ALBUMARTIST")) {
+                        artist = properties["ALBUMARTIST"].toString().to8Bit(true);
+                    }
+                    else if (properties.contains("ALBUM ARTIST")) {
+                        artist = properties["ALBUM ARTIST"].toString().to8Bit(true);
+                    }
+                    else {
+                        artist = file.tag()->artist().to8Bit(true);
+                    }
+                }
 
                 if (firstFile) {
                     commonArtist = artist;
                     commonAlbum = album;
+                    commonYear = year;
                     firstFile = false;
                 } else {
-                    if (artist != commonArtist || album != commonAlbum) {
+                    if (artist != commonArtist || album != commonAlbum || year != commonYear) {
                         std::cerr << "Mismatch found: " << entry.path().filename() << "\n";
+						std::cerr << "Expected: " << commonArtist << " - " << commonAlbum << " - " << commonYear << "\n";
+						std::cerr << "Found: " << artist << " - " << album << " - " << year << "\n";
                         return false;
                     }
                 }
             }
         }
     }
+	setAlbumArtist(commonArtist);
+	setAlbumName(commonAlbum);
+	setReleaseYear(std::to_string(commonYear));
     return true;
 }
 
