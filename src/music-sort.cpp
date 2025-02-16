@@ -126,6 +126,34 @@ void sortDirectoryOfAlbums(const std::string& unsortedDirectory, const std::stri
 						else {
 							std::cout << "Mismatch detected in artist or album tags." << std::endl;;
 							std::cout << "Would you like to update the artist and album tags? (y/n): " << std::endl;
+							std::string response;
+							std::cin >> response;
+							if (response == "y") {
+								std::vector<TagMismatch> mismatchingTags = verifyUniformTags(albumDirectory);
+								for (const auto& mismatch : mismatchingTags) {
+									std::cout << "Mismatch detected in " << mismatch.filename << std::endl;
+									std::cout << "Current artist: '" << mismatch.artist << "'." << std::endl;
+									std::cout << "Current album: '" << mismatch.album << "'." << std::endl;
+									std::cout << "Would you like to update the artist and album tags? (y/n): " << std::endl;
+									std::cin >> response;
+									std::cin.ignore();
+
+									if (response == "y") {
+										std::string newArtist, newAlbum;
+										std::cout << "Enter new artist: ";
+										std::getline(std::cin, newArtist);
+
+										std::cout << "Enter new album: ";
+										std::getline(std::cin, newAlbum);
+										
+										std::string filePathToUpdateTags = appendToDirectory(albumDirectory, mismatch.filename);
+										updateTags(filePathToUpdateTags, newArtist, newAlbum);
+									}
+								}
+							}
+							else {
+								std::cout << "Skipping album." << std::endl;
+							}
 						}
 					}
 					else {

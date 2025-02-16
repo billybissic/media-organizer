@@ -27,4 +27,8 @@ bool checkUniformTags(const std::string& directoryPath);
 
 std::vector<TagMismatch> verifyUniformTags(const std::string& directoryPath);
 
+void updateTags(const std::string& filePath, const std::string& newArtist, const std::string& newAlbum);
+
+void updateTagsInDirectory(const std::string& directoryPath, const std::string& newArtist, const std::string& newAlbum);
+
 #endif // TAG_READER_H
