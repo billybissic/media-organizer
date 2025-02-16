@@ -79,9 +79,9 @@ bool checkUniformTags(const std::string& directoryPath) {
                     firstFile = false;
                 } else {
                     if (artist != commonArtist || album != commonAlbum || year != commonYear) {
-                        std::cerr << "Mismatch found: " << entry.path().filename() << "\n";
-						std::cerr << "Expected: " << commonArtist << " - " << commonAlbum << " - " << commonYear << "\n";
-						std::cerr << "Found: " << artist << " - " << album << " - " << year << "\n";
+                        std::cerr << "Mismatch found: " << entry.path().filename() << std::endl;
+                        std::cerr << "Expected: " << commonArtist << " - " << commonAlbum << " - " << commonYear << std::endl;
+						std::cerr << "Found: " << artist << " - " << album << " - " << year << std::endl;
                         return false;
                     }
                 }

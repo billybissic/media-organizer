@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[]) {
    if (argc < 2) {
-      std::cerr << "Error: No command provided.\n";
+      std::cerr << "Error: No command provided." << std::endl;
       printHelp();
       return EXIT_FAILURE;
    }

@@ -9,21 +9,21 @@ std::vector<std::string> imageFileExtensions = { ".jpg", ".jpeg", ".png", ".bmp"
 bool isAudioFileSupported(std::string extension) {
 	for (const auto& audioExtension : audioFileExtensions) {
 		if (extension == audioExtension) {
-			std::cout << "Audio file extension is supported.\n";
+			std::cout << "Audio file extension is supported." << std::endl;
 			return true;
 		}
 	}
-	std::cout << "Audio file extension is not supported.\n";
+	std::cout << "Audio file extension is not supported." << std::endl;
 	return false;
 }
 bool isImageFileSupported(std::string extension) {
 	for (const auto& imageExtension : imageFileExtensions) {
 		if (extension == imageExtension) {
-			std::cout << "Image file extension is supported.\n";
+			std::cout << "Image file extension is supported." << std::endl;
 			return true;
 		}
 	}
-	std::cout << "Image file extension is not supported.\n";
+	std::cout << "Image file extension is not supported." << std::endl;
 	return false;
 }
 

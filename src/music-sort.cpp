@@ -22,10 +22,10 @@ bool checkIfAlbumExists(const std::string& albumDirectory) {
 
 bool verifyUniformTagsForAlbum(const std::string& albumDirectory) {
    if (checkUniformTags(albumDirectory)) {
-      std::cout << "All files have the same artist and album.\n";
+	   std::cout << "All files have the same artist and album." << std::endl;
       return true;
    } else {
-      std::cout << "Mismatch detected in artist or album tags.\n";
+      std::cout << "Mismatch detected in artist or album tags." << std::endl;
       return false;
    }
 }
@@ -79,7 +79,7 @@ void sortDirectoryOfAlbums(const std::string& unsortedDirectory, const std::stri
 					
 						//check if all files have the same artist and album	
 						if (checkUniformTags(albumDirectory)) {
-							std::cout << "   [*] - All files have the same artist and album.\n";
+							std::cout << "   [*] - All files have the same artist and album." << std::endl;
 							/* check if artist directory exists; then create it if not. */
 							currentArtistDirectory = appendToDirectory(destinationDirectory, artist);
 							if (checkIfDirectoryExists(currentArtistDirectory)) {
@@ -124,8 +124,8 @@ void sortDirectoryOfAlbums(const std::string& unsortedDirectory, const std::stri
 
 						}
 						else {
-							std::cout << "Mismatch detected in artist or album tags.\n";
-							std::cout << "Would you like to update the artist and album tags? (y/n): ";
+							std::cout << "Mismatch detected in artist or album tags." << std::endl;;
+							std::cout << "Would you like to update the artist and album tags? (y/n): " << std::endl;
 						}
 					}
 					else {

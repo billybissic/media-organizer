@@ -9,31 +9,31 @@
 #include <sstream>
 
 void printHelp() {
-   std::cout << "Commands:\n";
-   std::cout << "  help           - Show help\n";
-   std::cout << "  exit           - Exits the application\n";
-   std::cout << "  sort-albums    - Sort albums\n";
-   std::cout << "   required: \n";
-   std::cout << "     --sort-directory \n";
-   std::cout << "     --destination \n";
-   std::cout << "   optional: \n";
-   std::cout << "     --dry-run\n";
-   std::cout << "  sort-tracks    - Sort tracks\n";
-   std::cout << "   required: \n";
-   std::cout << "     --sort-directory \n";
-   std::cout << "     --destination \n";
-   std::cout << "   optional: \n";
-   std::cout << "     --dry-run\n";
-   std::cout << "  sort-directory - Sort directory\n";
-   std::cout << "   required: \n";
-   std::cout << "     --sort-directory \n";
-   std::cout << "     --destination \n";
-   std::cout << "   optional: \n";
-   std::cout << "     --dry-run\n";
-   std::cout << "  start-daemon   - Start daemon\n";
-   std::cout << "   required: \n";
-   std::cout << "     --sort-directory \n";
-   std::cout << "     --destination \n";
+   std::cout << "Commands:"                                     << std::endl;
+   std::cout << "  help           - Show help"                  << std::endl;
+   std::cout << "  exit           - Exits the application"      << std::endl;
+   std::cout << "  sort-albums    - Sort albums"                << std::endl;
+   std::cout << "   required: "                                 << std::endl;
+   std::cout << "     --sort-directory "                        << std::endl;
+   std::cout << "     --destination "                           << std::endl;
+   std::cout << "   optional: "                                 << std::endl;
+   std::cout << "     --dry-run"                                << std::endl;
+   std::cout << "  sort-tracks    - Sort tracks"                << std::endl;
+   std::cout << "   required: "                                 << std::endl;
+   std::cout << "     --sort-directory "                        << std::endl;
+   std::cout << "     --destination "                           << std::endl;
+   std::cout << "   optional: "                                 << std::endl;
+   std::cout << "     --dry-run"                                << std::endl;
+   std::cout << "  sort-directory - Sort directory"             << std::endl;
+   std::cout << "   required: "                                 << std::endl;
+   std::cout << "     --sort-directory "                        << std::endl;
+   std::cout << "     --destination "                           << std::endl;
+   std::cout << "   optional: "                                 << std::endl;
+   std::cout << "     --dry-run"                                << std::endl;
+   std::cout << "  start-daemon   - Start daemon"               << std::endl;
+   std::cout << "   required: "                                 << std::endl;
+   std::cout << "     --sort-directory "                        << std::endl;
+   std::cout << "     --destination "                           << std::endl;
 }
 
 std::map<std::string, std::string> parseArguments(int argc, char* argv[]) {
@@ -53,13 +53,13 @@ void executeCommand(const std::string& command, const std::map<std::string, std:
     }
 
     if (command == "exit") {
-        std::cout << "Exiting application...\n";
+        std::cout << "Exiting application..." << std::endl;
         exit(0);
     }
 
     // Required arguments check
     if (args.find("--sort-directory") == args.end() || args.find("--destination") == args.end()) {
-        std::cerr << "Error: Missing required arguments: --sort-directory and --destination\n";
+        std::cerr << "Error: Missing required arguments: --sort-directory and --destination" << std::endl;
         return;
     }
 
@@ -68,7 +68,7 @@ void executeCommand(const std::string& command, const std::map<std::string, std:
     bool dryRun = args.find("--dry-run") != args.end();
 
     if (!checkIfDirectoryExists(sortDirectory)) {
-        std::cerr << "Error: Sort directory does not exist: " << sortDirectory << "\n";
+        std::cerr << "Error: Sort directory does not exist: " << sortDirectory << std::endl;
         return;
     }
 
@@ -76,21 +76,21 @@ void executeCommand(const std::string& command, const std::map<std::string, std:
         std::cout << "Sorting" << std::endl << "From: " << sortDirectory << std::endl << "To: " << destination << std::endl;
         if (dryRun) {
             setDryRun(true);
-            std::cout << "[DRY RUN] No files will be moved.\n";
+            std::cout << "[DRY RUN] No files will be moved." << std::endl;
         }
         else {
-            std::cout << "Files will be moved.\n";
+            std::cout << "Files will be moved." << std::endl;
         }
 
         std::cout << "Would you like to continue? [y/n]: ";
         std::string response;
         std::cin >> response;
         if (response != "y") {
-            std::cout << "Exiting...\n";
+            std::cout << "Exiting..." << std::endl;
             return;
         }
         else {
-			std::cout << "Continuing...\n";
+			std::cout << "Continuing..." << std::endl;
 			clearScreen();
             sortDirectoryOfAlbums(sortDirectory, destination);
             //getFilesInDirectory(sortDirectory);
@@ -99,9 +99,9 @@ void executeCommand(const std::string& command, const std::map<std::string, std:
         
     } else if (command == "start-daemon") {
 		setDaemonStarted(true);
-        std::cout << "Starting daemon for " << sortDirectory << " with destination " << destination << "\n";
+        std::cout << "Starting daemon for " << sortDirectory << " with destination " << destination << std::endl;
     } else {
-        std::cerr << "Error: Unknown command: " << command << "\n";
+        std::cerr << "Error: Unknown command: " << command << std::endl;
     }
 }
 
