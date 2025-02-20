@@ -3,9 +3,15 @@
 #include <vector>
 #include <iostream>
 #include <filesystem>
-#include <filesystem>
+
 
 namespace fs = std::filesystem;
+std::vector<std::string> fileNamingConventions = { 
+	"Track Number - Artist - Album - Title", 
+	"Artist - Title", 
+	"Artist - Album - Title" 
+};
+std::string selectedFileNamingConvention = "";
 
 void copyFile(const std::string& source, const std::string& destination) {
 	std::cout << "Copying file from " << source << " to " << destination << std::endl;
@@ -92,4 +98,21 @@ bool validateIfDirectoryIsEmpty(const std::string& directory) {
 	}
 
 	return false;
+}
+
+void setFileNamingConvention(const std::string& namingConvention) {
+	std::cout << "Setting file naming convention " << namingConvention << std::endl;
+	selectedFileNamingConvention = namingConvention;
+}
+
+void displayFileNamingConventions() {
+	std::cout << "Displaying file naming conventions" << std::endl;
+	for (const auto& namingConvention : fileNamingConventions) {
+		std::cout << "   [*] - " << namingConvention << std::endl;
+	}
+}
+
+std::string getFileNamingConvention() {
+	std::cout << "Getting file naming convention" << std::endl;
+	return "";
 }

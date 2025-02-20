@@ -9,6 +9,7 @@
 extern std::string artistName;
 extern std::string releaseYear;
 extern std::string albumName;
+extern std::string fileType;
 extern std::vector<std::string> namingConventions;
 extern int selectedConvention;
 
@@ -18,6 +19,6 @@ void setAlbumName(const std::string& name);
 void setNamingConvention();
 void listNamingConventions();
 void nameDirectory();
-std::string generateAlbumDirectoryName(const std::string artist, const std::string album, const std::string year);
+std::string generateAlbumDirectoryName(const std::string& artist, const std::string& album, const std::string& year, const std::string& fileType = "");
 
 #endif

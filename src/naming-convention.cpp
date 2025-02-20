@@ -6,7 +6,13 @@
 std::string artistName = "";
 std::string albumName = "";
 std::string releaseYear = "";
-std::vector<std::string> namingConventions = { "ArtistAlbumYear", "YearArtistAlbum", "ArtistAlbum" };
+std::string fileType = "";
+std::vector<std::string> namingConventions = { 
+	"ArtistAlbumYear", 
+	"YearArtistAlbum", 
+	"ArtistAlbum", 
+	"YearArtistAlbumFileType"
+};
 int selectedConvention = 0;
 std::string namingConvention = "";
 
@@ -33,11 +39,11 @@ void listNamingConventions() {
 }
 
 
-
 void setNamingConvention() {
 	int input;
 	listNamingConventions();
 	std::cin >> input;
+	selectedConvention = input;
 	
 	//selectedConvention = input;
 	switch (input) {
@@ -49,6 +55,9 @@ void setNamingConvention() {
 		break;
 	case 3:
 		namingConvention = namingConventions[2];
+		break;
+	case 4:
+		namingConvention = namingConventions[3];
 		break;
 	default:
 		std::cout << "Invalid selection. " << std::endl;
@@ -64,7 +73,7 @@ void nameDirectory() {
 	}
 	switch (selectedConvention) {
 	case 1:
-		namingConvention = namingConventions[1];
+		namingConvention = namingConventions[0];
 		break;
 	case 2:
 		namingConvention = namingConventions[1];
@@ -72,13 +81,16 @@ void nameDirectory() {
 	case 3:
 		namingConvention = namingConventions[2];
 		break;
+	case 4:
+		namingConvention = namingConventions[3];
+		break;
 	default:
 		std::cout << "Invalid selection. " << std::endl;
 		break;
 	}
 }
 
-std::string generateAlbumDirectoryName(std::string artist, std::string album, std::string year) {
+std::string generateAlbumDirectoryName(const std::string& artist, const std::string& album, const std::string& year, const std::string& fileType) {
 	std::string directoryName = "";
 	if (namingConvention == "ArtistAlbumYear") {
 		directoryName = "[" + artist + "]" + "-" + "[" + album + "]" + "-" + "[" + year + "]";
@@ -88,6 +100,9 @@ std::string generateAlbumDirectoryName(std::string artist, std::string album, st
 	}
 	else if (namingConvention == "ArtistAlbum") {
 		directoryName = "[" + artist + "]-[" + album + "]";
+	}
+	else if (namingConvention == "YearArtistAlbumFileType") {
+		directoryName = "[" + year + "]-[" + artist + "]-[" + album + "]-[" + fileType + "]";
 	}
 	else {
 		std::cout << "Invalid naming convention. " << std::endl;

@@ -11,5 +11,6 @@ extern std::vector<std::string> imageFileExtensions;
 bool isAudioFileSupported(std::string extension);
 bool isImageFileSupported(std::string extension);
 std::string getFileExtension(const std::string& filePath);
+std::string findMostCommonFileExtensionInDirectory(const std::string& directory);
 
 #endif

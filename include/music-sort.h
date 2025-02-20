@@ -12,5 +12,6 @@ void moveFilesToAlbumDirectory(const std::string& fileFolder);
 void moveFolderToArtistDirectory(const std::string& fileFolder);
 void createArtistDirectory(const std::string& artistDirectory);
 void sortDirectoryOfAlbums(const std::string& unsortedDirectory, const std::string& destinationDirectory);
+void sortDirectoryOfAudioFiles(const std::string& unsortedDirectory, const std::string& destinationDirectory);
 
 #endif

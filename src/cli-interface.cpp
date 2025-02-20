@@ -73,7 +73,6 @@ void executeCommand(const std::string& command, const std::map<std::string, std:
     }
 
     if (command == "sort-albums" || command == "sort-tracks" || command == "sort-directory") {
-        std::cout << "Sorting" << std::endl << "From: " << sortDirectory << std::endl << "To: " << destination << std::endl;
         if (dryRun) {
             setDryRun(true);
             std::cout << "[DRY RUN] No files will be moved." << std::endl;
@@ -82,21 +81,41 @@ void executeCommand(const std::string& command, const std::map<std::string, std:
             std::cout << "Files will be moved." << std::endl;
         }
 
-        std::cout << "Would you like to continue? [y/n]: ";
-        std::string response;
-        std::cin >> response;
-        if (response != "y") {
-            std::cout << "Exiting..." << std::endl;
-            return;
+        if (command == "sort-albums") {
+            std::cout << "Sorting" << std::endl << "From: " << sortDirectory << std::endl << "To: " << destination << std::endl;
+           
+
+            std::cout << "Would you like to continue? [y/n]: ";
+            std::string response;
+            std::cin >> response;
+            if (response != "y") {
+                std::cout << "Exiting..." << std::endl;
+                return;
+            }
+            else {
+                std::cout << "Continuing..." << std::endl;
+                clearScreen();
+                sortDirectoryOfAlbums(sortDirectory, destination);
+            }
         }
-        else {
-			std::cout << "Continuing..." << std::endl;
-			clearScreen();
-            sortDirectoryOfAlbums(sortDirectory, destination);
-            //getFilesInDirectory(sortDirectory);
+        else if (command == "sort-tracks") {
+			std::cout << "Sorting" << std::endl << "From: " << sortDirectory << std::endl << "To: " << destination << std::endl;
+			std::cout << "Would you like to continue? [y/n]: ";
+			std::string response;
+			std::cin >> response;
+			if (response != "y") {
+				std::cout << "Exiting..." << std::endl;
+				return;
+			}
+			else {
+				std::cout << "Continuing..." << std::endl;
+				clearScreen();
+				sortDirectoryOfAudioFiles(sortDirectory, destination);
+			}
+		}
+        else if (command == "sort-directory") {
         }
-		 
-        
+		
     } else if (command == "start-daemon") {
 		setDaemonStarted(true);
         std::cout << "Starting daemon for " << sortDirectory << " with destination " << destination << std::endl;

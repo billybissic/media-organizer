@@ -4,6 +4,7 @@
 
 bool isDryRun = false;
 bool isDaemonStarted = false;
+bool allowCompilations = true;
 
 void setDryRun(bool dryRun) {
 	isDryRun = dryRun;
@@ -15,4 +16,8 @@ void setDaemonStarted(bool daemonStarted) {
 
 void clearScreen() {
 	std::cout << "\033[2J\033[H"; // ANSI escape code: clears screen and moves cursor to top
+}
+
+void setAllowCompilations(bool allow) {
+	allowCompilations = allow;
 }
